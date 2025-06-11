@@ -3,6 +3,7 @@ tick = 0
 tick_time = getTickCount()
 start_time = tick_time
 last_calc_time = tick_time
+debug = true
 
 
 function rem_log(...)
@@ -70,15 +71,16 @@ end
 ---@param timeout_ms number
 function check_for_fuel_message(timeout_ms)
     id, ext, data = rxCAN(0, timeout_ms) --100ms timeout
-    if id ~= nil then
-        print("CAN rx: " ..id .." ") --print ID and first element of received message
+    if debug and id ~= nil then
+        print("CAN rx: " ..id .." ")
         for i,v in next,data do
             print(string.format("%x ", v))
         end
         print("\n")
     end
-    if id == ecu_id then
+    if id == response_id then
         awaiting_fuel_reply = false
+        fuel_reply_time = getTickCount()
         return data
     else
         return nil
