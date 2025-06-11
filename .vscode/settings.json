@@ -1,0 +1,11 @@
+{
+    "Lua.diagnostics.globals": [
+        "getChannel",
+        "addChannel",
+        "setTickRate",
+        "getTickCount",
+        "initCAN",
+        "txCAN",
+        "println"
+    ]
+}
