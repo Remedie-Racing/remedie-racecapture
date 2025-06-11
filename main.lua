@@ -1,5 +1,9 @@
 setTickRate(100) --100Hz
 tick = 0
+tick_time = getTickCount()
+start_time = tick_time
+last_calc_time = tick_time
+
 
 function rem_log(...)
     local log_str = "[REM] " .. tostring(tick_time) .. ": "
