@@ -3,7 +3,7 @@ tick = 0
 tick_time = getTickCount()
 start_time = tick_time
 last_calc_time = tick_time
-debug = true
+rem_debug = true
 
 
 function rem_log(...)
@@ -63,7 +63,7 @@ function send_fuel_can_message()
     --  7E0#052380A70A020000
     local data = {0x05, 0x23, 0x80, 0xA7, 0x0A, 0x02, 0x00, 0x00}
     local res = txCAN(can_channel, ecu_id, 1, data)
-    if debug and res == 0 then rem_log("Failed to send CAN") end
+    if rem_debug and res == 0 then rem_log("Failed to send CAN") end
     awaiting_fuel_reply = res == 1
     return res
 end
@@ -71,7 +71,7 @@ end
 ---@param timeout_ms number
 function check_for_fuel_message(timeout_ms)
     id, ext, data = rxCAN(0, timeout_ms) --100ms timeout
-    if debug and id ~= nil then
+    if rem_debug and id ~= nil then
         print("CAN rx: " ..id .." ")
         for i,v in next,data do
             print(string.format("%x ", v))
@@ -81,7 +81,7 @@ function check_for_fuel_message(timeout_ms)
     if id == response_id then
         fuel_reply_time = getTickCount()
         awaiting_fuel_reply = false
-        if debug then
+        if rem_debug then
             local hex_str = ""
             for i,v in ipairs(data) do
                 hex_str = hex_str .. string.format("0x%X", v)
