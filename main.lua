@@ -59,7 +59,11 @@ end
 function check_for_fuel_message(timeout_ms)
     id, ext, data = rxCAN(0, timeout_ms) --100ms timeout
     if id ~= nil then
-        println("CAN rx: " ..id .." " ..data[1]) --print ID and first element of received message
+        print("CAN rx: " ..id .." ") --print ID and first element of received message
+        for i,v in next,data do
+            print(string.format("%x ", v))
+        end
+        print("\n")
     end
     if id == ecu_id then
         awaiting_fuel_reply = false
