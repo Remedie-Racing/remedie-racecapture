@@ -88,9 +88,9 @@ function check_for_fuel_message(timeout_ms)
 end
 
 function init()
-    print("Init CAN...")
+    rem_log("Init CAN...")
     local success = initCAN(can_channel, 500000)
-    print(" Done: " ..success)
+    rem_log("Init CAN Done: ", success)
 end
 
 
