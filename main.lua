@@ -1,6 +1,14 @@
 setTickRate(100) --100Hz
 tick = 0
-last_calc_time = getTickCount()
+
+function rem_log(...)
+    local log_str = "[REM] " .. tostring(tick_time) .. ": "
+    for i,v in ipairs(arg) do
+        log_str = log_str .. tostring(v) .. " "
+    end
+    log_str = log_str .. "\n"
+    print(log_str)
+end
 
 ---@param current_time_ms number
 local function get_fuel_use(current_time_ms)
