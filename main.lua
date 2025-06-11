@@ -71,7 +71,7 @@ end
 
 ---@param timeout_ms number
 function check_for_fuel_message(timeout_ms)
-    id, ext, data = rxCAN(0, timeout_ms) --100ms timeout
+    id, ext, data = rxCAN(can_channel, timeout_ms) --100ms timeout
     if rem_debug and id ~= nil then
         print("CAN rx: " ..id .." ")
         for i,v in next,data do
