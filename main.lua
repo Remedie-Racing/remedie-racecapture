@@ -54,16 +54,16 @@ local function get_fuel_use(current_time_ms)
 end
 
 can_channel = 0
-
 awaiting_fuel_reply = false
 ecu_id = 0x7E0
+response_id = 0x7E8
+fuel_reply_time = 0
 
 function send_fuel_can_message()
     --  7E0#052380A70A020000
-    local ext = 0
     local data = {0x05, 0x23, 0x80, 0xA7, 0x0A, 0x02, 0x00, 0x00}
-    local res = txCAN(can_channel, ecu_id, ext, data)
-    if res == 0 then println("Failed to send CAN") end
+    local res = txCAN(can_channel, ecu_id, 1, data)
+    if debug and res == 0 then rem_log("Failed to send CAN") end
     awaiting_fuel_reply = res == 1
     return res
 end
