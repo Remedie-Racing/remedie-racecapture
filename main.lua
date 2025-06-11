@@ -95,7 +95,7 @@ end
 
 
 function onTick()
-    local current_time_ms = getTickCount()
+    tick_time = getTickCount()
     if tick % 2 == 0 then --50Hz
     end
 
@@ -104,13 +104,13 @@ function onTick()
     end
 
     if tick % 10 == 0 then --10Hz
-        if not awaiting_fuel_reply
-        then
+        if not awaiting_fuel_reply then
             send_fuel_can_message()
-        else
-            check_for_fuel_message(50)
         end
         -- get_fuel_use(current_time_ms)
+    end
+    if awaiting_fuel_reply then
+        check_for_fuel_message(5)
     end
 
     if tick % 20 == 0 then --5Hz
