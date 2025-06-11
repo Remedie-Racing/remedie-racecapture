@@ -79,8 +79,15 @@ function check_for_fuel_message(timeout_ms)
         print("\n")
     end
     if id == response_id then
-        awaiting_fuel_reply = false
         fuel_reply_time = getTickCount()
+        awaiting_fuel_reply = false
+        if debug then
+            local hex_str = ""
+            for i,v in ipairs(data) do
+                hex_str = hex_str .. string.format("0x%X", v)
+            end
+            rem_log("Received fuel response:", hex_str)
+        end
         return data
     else
         return nil
